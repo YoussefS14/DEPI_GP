@@ -2,7 +2,7 @@ import hashlib
 import tempfile
 import unittest
 from pathlib import Path
-from analysis_modules import analyze_macros, extract_iocs, score_risk
+from email_analyzer.analysis_modules import analyze_macros, extract_iocs, score_risk
 from main import read_input
 
 class AnalysisTests(unittest.TestCase):
@@ -36,7 +36,7 @@ class AnalysisTests(unittest.TestCase):
         self.assertIsNone(r['has_macros'])
         self.assertEqual(r['risk'], 'unknown')
     def test_inert_macro_source(self):
-        r = analyze_macros(Path(__file__).parent/'samples'/'demo_macro.bas')
+        r = analyze_macros(Path(__file__).resolve().parents[1]/'samples'/'demo_macro.bas')
         self.assertEqual(r['status'], 'ok')
         self.assertTrue(r['has_macros'])
         self.assertTrue(r['indicators'])

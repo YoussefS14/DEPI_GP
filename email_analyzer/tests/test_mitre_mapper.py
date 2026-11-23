@@ -1,10 +1,6 @@
-import sys
-from pathlib import Path
-
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from mitre_mapper import map_attack, to_markdown
+from email_analyzer.mitre_mapper import map_attack, to_markdown
 
 
 def att(name="invoice.pdf", ext=".pdf", detected="pdf"):

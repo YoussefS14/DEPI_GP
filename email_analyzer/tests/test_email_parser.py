@@ -1,9 +1,6 @@
-import sys
-from pathlib import Path
 from email.message import EmailMessage
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from email_parser import parse_eml, hdr
+from email_analyzer.email_parser import parse_eml, hdr
 
 
 def make_eml(tmp_path, with_attachment=False):

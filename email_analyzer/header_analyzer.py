@@ -2,7 +2,7 @@
 import re
 from email.utils import parseaddr, parsedate_to_datetime
 
-from email_parser import hdr
+from .email_parser import hdr
 
 IP_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 REQUIRED = ["From", "Date", "Subject", hdr("Message", "ID")]
@@ -43,6 +43,17 @@ def parse_received(line):
 def _finding(fid, kind, severity, detail, evidence):
     return {"id": fid, "kind": kind, "severity": severity,
             "detail": detail, "evidence": evidence}
+
+
+def recorded_auth(value):
+    results = dict.fromkeys(("spf", "dkim", "dmarc"), "unknown")
+    for clause in re.sub(r"\([^()]*\)", "", value or "").split(";")[1:]:
+        match = re.match(r"\s*(spf|dkim|dmarc)\s*=\s*([\w-]+)", clause, re.I)
+        if match:
+            method, status = (item.lower() for item in match.groups())
+            previous = results[method]
+            results[method] = status if previous in ("unknown", status) else "conflicting"
+    return results
 
 
 def analyze_headers(parsed):
@@ -116,6 +127,7 @@ def analyze_headers(parsed):
         "return_path_domain": return_dom,
         "message_id_domain": msgid_dom,
         "authentication_results_raw": h.get(hdr("Authentication", "Results")),
+        "authentication": recorded_auth(h.get(hdr("Authentication", "Results"))),
         "hop_count": len(hops),
         "hops": hops,
         "findings": findings,

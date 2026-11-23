@@ -1,0 +1,60 @@
+<group name="depi_email,phishing,">
+  <rule id="110210" level="10">
+    <decoded_as>json</decoded_as>
+    <field name="depi_source">^depi_email_analyzer$</field>
+    <field name="depi_event_type">^email_analysis_replay$</field>
+    <field name="depi_verdict">^suspicious$</field>
+    <field name="depi_risk_level">^high$</field>
+    <description>DEPI high-risk phishing analysis replay ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+
+  <rule id="110211" level="7">
+    <decoded_as>json</decoded_as>
+    <field name="depi_source">^depi_email_analyzer$</field>
+    <field name="depi_event_type">^email_analysis_replay$</field>
+    <field name="depi_verdict">^suspicious$</field>
+    <field name="depi_risk_level">^medium$</field>
+    <description>DEPI medium-risk email analysis replay requires triage ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+
+  <rule id="110212" level="5">
+    <decoded_as>json</decoded_as>
+    <field name="depi_source">^depi_email_analyzer$</field>
+    <field name="depi_event_type">^email_analysis_replay$</field>
+    <field name="depi_verdict">^inconclusive$</field>
+    <field name="depi_risk_level">^low$</field>
+    <field name="depi_spf">^fail$</field>
+    <field name="depi_dmarc">^fail$</field>
+    <description>DEPI email reported SPF and DMARC failures; review authentication ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+
+  <rule id="110213" level="8">
+    <if_sid>110211</if_sid>
+    <field name="depi_suspicious_macros">^no$</field>
+    <field name="depi_suspicious_url">^yes$</field>
+    <field name="depi_suspicious_attachment">^no$</field>
+    <description>DEPI medium-risk email with a suspicious link ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+
+  <rule id="110214" level="8">
+    <if_sid>110211</if_sid>
+    <field name="depi_suspicious_macros">^no$</field>
+    <field name="depi_suspicious_url">^no$</field>
+    <field name="depi_suspicious_attachment">^yes$</field>
+    <description>DEPI medium-risk email with a suspicious attachment ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+
+  <rule id="110215" level="9">
+    <if_sid>110211</if_sid>
+    <field name="depi_suspicious_macros">^no$</field>
+    <field name="depi_suspicious_url">^yes$</field>
+    <field name="depi_suspicious_attachment">^yes$</field>
+    <description>DEPI medium-risk email with both a suspicious link and attachment ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+
+  <rule id="110216" level="9">
+    <if_sid>110211</if_sid>
+    <field name="depi_suspicious_macros">^yes$</field>
+    <description>DEPI medium-risk email with suspicious static macro indicators ($(depi_provenance)): $(depi_report).</description>
+  </rule>
+</group>

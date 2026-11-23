@@ -1,0 +1,118 @@
+{
+  "parsed": {
+    "file": "email_analyzer/samples/incomplete_001.eml",
+    "message_sha256": "5333a7b25421794c903fcddfc18b4c673a9afdb67a5b3ae27b59b2ce7b61c709",
+    "headers": {
+      "From": "unknown@example.com",
+      "To": null,
+      "Cc": null,
+      "Subject": "Hello",
+      "Date": null,
+      "Reply-To": null,
+      "Return-Path": null,
+      "Message-ID": null,
+      "Authentication-Results": null,
+      "DKIM-Signature": null,
+      "Received-SPF": null
+    },
+    "received": [],
+    "content_types": [
+      "text/plain"
+    ],
+    "attachments": [],
+    "defects": [],
+    "parse_errors": []
+  },
+  "headers": {
+    "sender": {
+      "display_name": "",
+      "address": "unknown@example.com",
+      "domain": "example.com"
+    },
+    "reply_to_domain": null,
+    "return_path_domain": null,
+    "message_id_domain": null,
+    "authentication_results_raw": null,
+    "authentication": {
+      "spf": "unknown",
+      "dkim": "unknown",
+      "dmarc": "unknown"
+    },
+    "hop_count": 0,
+    "hops": [],
+    "findings": [
+      {
+        "id": "missing_header",
+        "kind": "observed",
+        "severity": "low",
+        "detail": "Date header is missing",
+        "evidence": {
+          "header": "Date"
+        }
+      },
+      {
+        "id": "missing_header",
+        "kind": "observed",
+        "severity": "low",
+        "detail": "Message-ID header is missing",
+        "evidence": {
+          "header": "Message-ID"
+        }
+      },
+      {
+        "id": "no_received",
+        "kind": "observed",
+        "severity": "low",
+        "detail": "No Received headers found",
+        "evidence": {}
+      }
+    ]
+  },
+  "iocs": {
+    "urls": [],
+    "domains": [],
+    "ips": [],
+    "emails": [],
+    "sha256_attachments": {},
+    "sha256_embedded_attachments": []
+  },
+  "urls": [],
+  "macros": null,
+  "risk": {
+    "score": 0,
+    "level": "low",
+    "reasons": {}
+  },
+  "mitre": {
+    "verdict": "inconclusive",
+    "provenance": "simulated",
+    "mapped": [],
+    "not_mapped": [
+      {
+        "technique_id": "T1566.001",
+        "area": null,
+        "reason": "no attachment in this sample"
+      },
+      {
+        "technique_id": "T1566.002",
+        "area": null,
+        "reason": "no suspicious link in this sample"
+      },
+      {
+        "technique_id": "T1566",
+        "area": null,
+        "reason": "verdict is inconclusive"
+      },
+      {
+        "technique_id": "T1204.002",
+        "area": null,
+        "reason": "static email analysis shows delivery, not execution; map after endpoint evidence exists"
+      },
+      {
+        "technique_id": null,
+        "area": "Defense Evasion",
+        "reason": "no specific evasion behavior observed"
+      }
+    ]
+  }
+}

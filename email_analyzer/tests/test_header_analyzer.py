@@ -1,9 +1,5 @@
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from email_parser import hdr
-from header_analyzer import analyze_headers, parse_received
+from email_analyzer.email_parser import hdr
+from email_analyzer.header_analyzer import analyze_headers, parse_received
 
 
 def base():

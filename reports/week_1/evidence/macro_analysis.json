@@ -1,0 +1,28 @@
+{
+  "source": "email_analyzer/samples/demo_macro.bas",
+  "provenance": "synthetic",
+  "analysis": {
+    "file": "email_analyzer\\samples\\demo_macro.bas",
+    "has_macros": true,
+    "indicators": [
+      {
+        "module": "email_analyzer\\samples\\demo_macro.bas",
+        "keyword": "AutoOpen"
+      },
+      {
+        "module": "email_analyzer\\samples\\demo_macro.bas",
+        "keyword": "WScript.Shell"
+      },
+      {
+        "module": "email_analyzer\\samples\\demo_macro.bas",
+        "keyword": "PowerShell"
+      },
+      {
+        "module": "email_analyzer\\samples\\demo_macro.bas",
+        "keyword": "URLDownloadToFile"
+      }
+    ],
+    "risk": "high",
+    "status": "ok"
+  }
+}

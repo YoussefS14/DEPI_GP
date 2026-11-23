@@ -1,0 +1,105 @@
+{
+  "parsed": {
+    "file": "email_analyzer/samples/benign_001.eml",
+    "message_sha256": "f81c043fb742d9629279f99153fa2dafab06cb23df620e459341b83da7afb092",
+    "headers": {
+      "From": "Alice HR <alice@example.com>",
+      "To": "labuser@example.test",
+      "Cc": null,
+      "Subject": "Team meeting tomorrow",
+      "Date": "Mon, 02 Nov 2026 09:00:00 +0000",
+      "Reply-To": null,
+      "Return-Path": "<alice@example.com>",
+      "Message-ID": "<benign-001@example.com>",
+      "Authentication-Results": "mx.example.test; spf=pass smtp.mailfrom=example.com; dkim=pass header.d=example.com; dmarc=pass header.from=example.com",
+      "DKIM-Signature": null,
+      "Received-SPF": null
+    },
+    "received": [
+      "from mail.example.com (mail.example.com [192.0.2.10]) by mx.example.test with ESMTPS; Mon, 02 Nov 2026 09:00:05 +0000"
+    ],
+    "content_types": [
+      "text/plain"
+    ],
+    "attachments": [],
+    "defects": [],
+    "parse_errors": []
+  },
+  "headers": {
+    "sender": {
+      "display_name": "Alice HR",
+      "address": "alice@example.com",
+      "domain": "example.com"
+    },
+    "reply_to_domain": null,
+    "return_path_domain": "example.com",
+    "message_id_domain": "example.com",
+    "authentication_results_raw": "mx.example.test; spf=pass smtp.mailfrom=example.com; dkim=pass header.d=example.com; dmarc=pass header.from=example.com",
+    "authentication": {
+      "spf": "pass",
+      "dkim": "pass",
+      "dmarc": "pass"
+    },
+    "hop_count": 1,
+    "hops": [
+      {
+        "from_host": "mail.example.com",
+        "by_host": "mx.example.test",
+        "ips": [
+          "192.0.2.10"
+        ],
+        "timestamp_raw": "Mon, 02 Nov 2026 09:00:05 +0000",
+        "timestamp": "2026-11-02T09:00:05+00:00",
+        "raw": "from mail.example.com (mail.example.com [192.0.2.10]) by mx.example.test with ESMTPS; Mon, 02 Nov 2026 09:00:05 +0000"
+      }
+    ],
+    "findings": []
+  },
+  "iocs": {
+    "urls": [],
+    "domains": [],
+    "ips": [],
+    "emails": [],
+    "sha256_attachments": {},
+    "sha256_embedded_attachments": []
+  },
+  "urls": [],
+  "macros": null,
+  "risk": {
+    "score": 0,
+    "level": "low",
+    "reasons": {}
+  },
+  "mitre": {
+    "verdict": "inconclusive",
+    "provenance": "simulated",
+    "mapped": [],
+    "not_mapped": [
+      {
+        "technique_id": "T1566.001",
+        "area": null,
+        "reason": "no attachment in this sample"
+      },
+      {
+        "technique_id": "T1566.002",
+        "area": null,
+        "reason": "no suspicious link in this sample"
+      },
+      {
+        "technique_id": "T1566",
+        "area": null,
+        "reason": "verdict is inconclusive"
+      },
+      {
+        "technique_id": "T1204.002",
+        "area": null,
+        "reason": "static email analysis shows delivery, not execution; map after endpoint evidence exists"
+      },
+      {
+        "technique_id": null,
+        "area": "Defense Evasion",
+        "reason": "no specific evasion behavior observed"
+      }
+    ]
+  }
+}

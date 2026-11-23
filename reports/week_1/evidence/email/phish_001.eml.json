@@ -1,0 +1,200 @@
+{
+  "parsed": {
+    "file": "email_analyzer/samples/phish_001.eml",
+    "message_sha256": "a8b21afa7d23ca2a6773a245d329527bbe25574124d9ef3cdacf8e5703d0652b",
+    "headers": {
+      "From": "Microsoft Support <support@micros0ft-security.invalid>",
+      "To": "labuser@example.test",
+      "Cc": null,
+      "Subject": "URGENT: Your account will be suspended",
+      "Date": "Tue, 03 Nov 2026 03:12:00 +0000",
+      "Reply-To": "collector@evil-reply.invalid",
+      "Return-Path": "<bounce@random-host.invalid>",
+      "Message-ID": "<phish-001@random-host.invalid>",
+      "Authentication-Results": "mx.example.test; spf=fail smtp.mailfrom=random-host.invalid; dkim=none; dmarc=fail header.from=micros0ft-security.invalid",
+      "DKIM-Signature": null,
+      "Received-SPF": null
+    },
+    "received": [
+      "from unknown (HELO mail.random-host.invalid) (198.51.100.23) by mx.example.test with SMTP; Tue, 03 Nov 2026 03:12:10 +0000",
+      "from relay1.random-host.invalid (relay1.random-host.invalid [203.0.113.45]) by mail.random-host.invalid with ESMTP; Tue, 03 Nov 2026 03:12:05 +0000"
+    ],
+    "content_types": [
+      "multipart/mixed",
+      "multipart/alternative",
+      "text/plain",
+      "text/html",
+      "application/octet-stream"
+    ],
+    "attachments": [
+      {
+        "filename": "Invoice_2026.pdf.exe",
+        "extension": ".exe",
+        "content_type": "application/octet-stream",
+        "disposition": "attachment",
+        "size": 33,
+        "sha256": "66ddbcdbad014d1370434d9109715a94eb2e8f478619d5b20b3afd605ec21c1b",
+        "magic": "42454e49474e2054",
+        "detected_type": "unknown"
+      }
+    ],
+    "defects": [],
+    "parse_errors": []
+  },
+  "headers": {
+    "sender": {
+      "display_name": "Microsoft Support",
+      "address": "support@micros0ft-security.invalid",
+      "domain": "micros0ft-security.invalid"
+    },
+    "reply_to_domain": "evil-reply.invalid",
+    "return_path_domain": "random-host.invalid",
+    "message_id_domain": "random-host.invalid",
+    "authentication_results_raw": "mx.example.test; spf=fail smtp.mailfrom=random-host.invalid; dkim=none; dmarc=fail header.from=micros0ft-security.invalid",
+    "authentication": {
+      "spf": "fail",
+      "dkim": "none",
+      "dmarc": "fail"
+    },
+    "hop_count": 2,
+    "hops": [
+      {
+        "from_host": "relay1.random-host.invalid",
+        "by_host": "mail.random-host.invalid",
+        "ips": [
+          "203.0.113.45"
+        ],
+        "timestamp_raw": "Tue, 03 Nov 2026 03:12:05 +0000",
+        "timestamp": "2026-11-03T03:12:05+00:00",
+        "raw": "from relay1.random-host.invalid (relay1.random-host.invalid [203.0.113.45]) by mail.random-host.invalid with ESMTP; Tue, 03 Nov 2026 03:12:05 +0000"
+      },
+      {
+        "from_host": "unknown",
+        "by_host": "mx.example.test",
+        "ips": [
+          "198.51.100.23"
+        ],
+        "timestamp_raw": "Tue, 03 Nov 2026 03:12:10 +0000",
+        "timestamp": "2026-11-03T03:12:10+00:00",
+        "raw": "from unknown (HELO mail.random-host.invalid) (198.51.100.23) by mx.example.test with SMTP; Tue, 03 Nov 2026 03:12:10 +0000"
+      }
+    ],
+    "findings": [
+      {
+        "id": "reply_to_mismatch",
+        "kind": "heuristic",
+        "severity": "medium",
+        "detail": "Reply domain differs from From domain",
+        "evidence": {
+          "from": "micros0ft-security.invalid",
+          "reply_to": "evil-reply.invalid"
+        }
+      },
+      {
+        "id": "return_path_mismatch",
+        "kind": "heuristic",
+        "severity": "low",
+        "detail": "Return path domain differs from From domain (mailing lists do this legitimately)",
+        "evidence": {
+          "from": "micros0ft-security.invalid",
+          "return_path": "random-host.invalid"
+        }
+      },
+      {
+        "id": "message_id_domain_mismatch",
+        "kind": "heuristic",
+        "severity": "low",
+        "detail": "Message ID domain differs from From domain",
+        "evidence": {
+          "from": "micros0ft-security.invalid",
+          "message_id": "random-host.invalid"
+        }
+      }
+    ]
+  },
+  "iocs": {
+    "urls": [
+      "http://login.micros0ft-security.invalid/verify?id=123"
+    ],
+    "domains": [
+      "login.micros0ft-security.invalid"
+    ],
+    "ips": [],
+    "emails": [],
+    "sha256_attachments": {},
+    "sha256_embedded_attachments": [
+      {
+        "filename": "Invoice_2026.pdf.exe",
+        "sha256": "66ddbcdbad014d1370434d9109715a94eb2e8f478619d5b20b3afd605ec21c1b"
+      }
+    ]
+  },
+  "urls": [
+    {
+      "url": "http://login.micros0ft-security.invalid/verify?id=123",
+      "suspicious": true,
+      "reasons": [
+        "visible_destination_mismatch"
+      ]
+    }
+  ],
+  "macros": null,
+  "risk": {
+    "score": 70,
+    "level": "high",
+    "reasons": {
+      "spf_fail": 10,
+      "dmarc_fail": 15,
+      "suspicious_url": 20,
+      "suspicious_attachment": 20,
+      "urgent_language": 5
+    }
+  },
+  "mitre": {
+    "verdict": "suspicious",
+    "provenance": "simulated",
+    "mapped": [
+      {
+        "technique_id": "T1566.001",
+        "name": "Phishing: Spearphishing Attachment",
+        "tactic": "Initial Access",
+        "status": "simulated",
+        "confidence": "medium",
+        "evidence": [
+          "filename=Invoice_2026.pdf.exe detected_type=unknown sha256=66ddbcdbad014d1370434d9109715a94eb2e8f478619d5b20b3afd605ec21c1b"
+        ],
+        "source": "email_parser.attachments",
+        "rationale": "Suspicious message delivered with an attachment."
+      },
+      {
+        "technique_id": "T1566.002",
+        "name": "Phishing: Spearphishing Link",
+        "tactic": "Initial Access",
+        "status": "simulated",
+        "confidence": "medium",
+        "evidence": [
+          "url=http://login.micros0ft-security.invalid/verify?id=123 reasons=visible_destination_mismatch"
+        ],
+        "source": "url_analyzer.findings",
+        "rationale": "Suspicious message containing links flagged as suspicious."
+      }
+    ],
+    "not_mapped": [
+      {
+        "technique_id": "T1566",
+        "area": null,
+        "reason": "mapped at the sub technique level instead"
+      },
+      {
+        "technique_id": "T1204.002",
+        "area": null,
+        "reason": "static email analysis shows delivery, not execution; map after endpoint evidence exists"
+      },
+      {
+        "technique_id": null,
+        "area": "Defense Evasion",
+        "reason": "no specific evasion behavior observed"
+      }
+    ]
+  }
+}

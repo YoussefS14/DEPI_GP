@@ -1,5 +1,15 @@
 venv/
+.venv/
 __pycache__/
-samples/
+.env
+.env.*
+!.env.example
+/samples/
 *.eml
+!/email_analyzer/samples/benign_001.eml
+!/email_analyzer/samples/phish_001.eml
+!/email_analyzer/samples/incomplete_001.eml
+!/email_analyzer/samples/malformed_001.eml
+/.pytest_cache/
+/reports/generated/
 *.pyc

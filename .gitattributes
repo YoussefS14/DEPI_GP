@@ -1,0 +1,2 @@
+# Preserve the exact fixture bytes used by the Week 1 SHA-256 evidence.
+/email_analyzer/samples/*.eml -text

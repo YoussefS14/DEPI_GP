@@ -1,0 +1,9 @@
+type,value,evidence_field,reason,provenance
+url,http://login.micros0ft-security.invalid/verify?id=123,iocs.urls / urls,HTML destination differs from visible link,simulated
+destination_domain,login.micros0ft-security.invalid,iocs.domains,Host of the flagged URL,simulated
+sender_domain,micros0ft-security.invalid,parsed.headers.From,Lookalike sender domain,simulated
+reply_address,collector@evil-reply.invalid,parsed.headers.Reply-To,Reply domain differs from From domain,simulated
+relay_ip,203.0.113.45,headers.hops[].ips,Address recorded in the Received trace,simulated
+relay_ip,198.51.100.23,headers.hops[].ips,Address recorded in the Received trace,simulated
+attachment_name,Invoice_2026.pdf.exe,parsed.attachments[].filename,Double extension ending in .exe,simulated
+attachment_sha256,66ddbcdbad014d1370434d9109715a94eb2e8f478619d5b20b3afd605ec21c1b,parsed.attachments[].sha256,Hash of the embedded attachment bytes,simulated

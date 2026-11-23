@@ -1,0 +1,15 @@
+From: Alice HR <alice@example.com>
+To: labuser@example.test
+Subject: Team meeting tomorrow
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <benign-001@example.com>
+Return-Path: <alice@example.com>
+Received: from mail.example.com (mail.example.com [192.0.2.10]) by
+ mx.example.test with ESMTPS; Mon, 02 Nov 2026 09:00:05 +0000
+Authentication-Results: mx.example.test; spf=pass smtp.mailfrom=example.com;
+ dkim=pass header.d=example.com; dmarc=pass header.from=example.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Hi, the meeting is at 10:00 tomorrow. See you.

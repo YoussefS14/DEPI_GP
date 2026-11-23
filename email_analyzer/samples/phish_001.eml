@@ -1,0 +1,48 @@
+From: Microsoft Support <support@micros0ft-security.invalid>
+To: labuser@example.test
+Reply-To: collector@evil-reply.invalid
+Return-Path: <bounce@random-host.invalid>
+Subject: URGENT: Your account will be suspended
+Date: Tue, 03 Nov 2026 03:12:00 +0000
+Message-ID: <phish-001@random-host.invalid>
+Received: from unknown (HELO mail.random-host.invalid) (198.51.100.23) by
+ mx.example.test with SMTP; Tue, 03 Nov 2026 03:12:10 +0000
+Received: from relay1.random-host.invalid (relay1.random-host.invalid
+ [203.0.113.45]) by mail.random-host.invalid with ESMTP; Tue, 03 Nov 2026
+ 03:12:05 +0000
+Authentication-Results: mx.example.test; spf=fail
+ smtp.mailfrom=random-host.invalid; dkim=none; dmarc=fail
+ header.from=micros0ft-security.invalid
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============0370466063825688680=="
+
+--===============0370466063825688680==
+Content-Type: multipart/alternative;
+ boundary="===============7138725618967051306=="
+
+--===============7138725618967051306==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Your account will be suspended. Verify now: http://login.micros0ft-security.i=
+nvalid/verify?id=3D123
+
+--===============7138725618967051306==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><p>Verify now: <a href=3D"http://login.micros0ft-security.invalid=
+/verify?id=3D123">https://microsoft.com/secure</a></p></body></html>
+
+--===============7138725618967051306==--
+
+--===============0370466063825688680==
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Invoice_2026.pdf.exe"
+MIME-Version: 1.0
+
+QkVOSUdOIFRFU1QgQ09OVEVOVCAtIE5PVCBNQUxXQVJF
+
+--===============0370466063825688680==--

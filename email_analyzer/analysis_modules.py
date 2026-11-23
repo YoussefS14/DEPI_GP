@@ -17,7 +17,7 @@ def analyze_macros(file_path):
         results['status'] = 'ok'
         results['risk'] = 'low'
         if results['has_macros']:
-            for _, stream, name, code in parser.extract_macros():
+            for _, _, name, code in parser.extract_macros():
                 for term in SUSPICIOUS_MACRO_TERMS:
                     if term.lower() in code.lower():
                         results['indicators'].append({'module': name, 'keyword': term})
@@ -41,7 +41,13 @@ def extract_iocs(text, attachment_paths=()):
         except ipaddress.AddressValueError:
             pass
     domains = set(re.findall(r'\b(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b', text))
-    domains.update(urlparse(url).hostname for url in urls if urlparse(url).hostname)
+    for url in urls:
+        try:
+            hostname = urlparse(url).hostname
+        except ValueError:
+            continue
+        if hostname:
+            domains.add(hostname)
     domains = {d.lower() for d in domains}
     domains.difference_update(ips)
     hashes = {}
